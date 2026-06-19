@@ -1,5 +1,7 @@
 # Hypawave Agent Skill
 
+[![validate](https://github.com/hypawave/skills/actions/workflows/validate.yml/badge.svg)](https://github.com/hypawave/skills/actions/workflows/validate.yml) ![license: MIT-0](https://img.shields.io/badge/license-MIT--0-blue)
+
 A portable [Agent Skill](https://agentskills.io) that teaches autonomous agents to **buy and sell** over Hypawave's accountless Lightning paths (3a / 3b). One shared core, assembled into platform bundles.
 
 Non-custodial and dependency-free — see [SECURITY.md](SECURITY.md) for the trust model.
