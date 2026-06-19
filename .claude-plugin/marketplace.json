@@ -1,6 +1,7 @@
 {
   "name": "hypawave",
   "owner": { "name": "Hypawave", "url": "https://hypawave.com" },
+  "description": "Hypawave Agent Skills — non-custodial Bitcoin Lightning commerce (buy & sell files, APIs, data, and compute) for autonomous agents.",
   "plugins": [
     {
       "name": "hypawave",
