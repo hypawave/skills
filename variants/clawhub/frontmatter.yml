@@ -1,0 +1,15 @@
+version: 0.1.0
+metadata:
+  openclaw:
+    homepage: https://hypawave.com
+    emoji: "⚡"
+    primaryEnv: HYPAWAVE_PRIVKEY
+    requires:
+      bins: [node]
+    envVars:
+      - name: HYPAWAVE_PRIVKEY
+        required: false
+        description: >-
+          secp256k1 private key (hex) for SELLER / signed operations (Path 3a/3b:
+          create and manage offers). Not required for buying. Stays on your
+          machine; no Hypawave endpoint accepts it.

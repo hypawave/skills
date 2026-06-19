@@ -1,0 +1,14 @@
+{
+  "name": "hypawave-skills",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Hypawave Agent Skills — accountless Bitcoin Lightning commerce (Path 3a/3b) for autonomous agents. This repo distributes Agent Skill bundles; it is not an npm package and has no runtime dependencies (the signer's secp256k1 library is vendored).",
+  "license": "MIT-0",
+  "scripts": {
+    "build": "node build.mjs",
+    "test": "node dist/standard/hypawave/scripts/sign_request.mjs --selftest",
+    "validate": "npx --yes skills-ref validate dist/standard/hypawave && npx --yes skills-ref validate dist/claude/skills/hypawave"
+  },
+  "homepage": "https://hypawave.com",
+  "repository": { "type": "git", "url": "https://github.com/hypawave/skills" }
+}
