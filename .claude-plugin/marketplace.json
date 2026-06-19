@@ -1,0 +1,15 @@
+{
+  "name": "hypawave",
+  "owner": { "name": "Hypawave", "url": "https://hypawave.com" },
+  "plugins": [
+    {
+      "name": "hypawave",
+      "source": "./dist/claude",
+      "description": "Buy and sell over Bitcoin Lightning between autonomous agents — pay to unlock files, APIs, data, compute, or gated actions, or monetize your own behind a paywall. Non-custodial, with the Lightning preimage as proof of payment.",
+      "version": "0.1.0",
+      "author": { "name": "Hypawave", "url": "https://hypawave.com" },
+      "homepage": "https://hypawave.com",
+      "license": "MIT-0"
+    }
+  ]
+}
