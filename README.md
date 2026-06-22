@@ -14,8 +14,9 @@ Non-custodial and dependency-free — see [SECURITY.md](SECURITY.md) for the tru
   /plugin install hypawave@hypawave
   ```
   Or use it standalone: copy `dist/standard/hypawave/` into `~/.claude/skills/`.
-- **Cursor / Codex / Gemini / other agentskills.io tools** — point them at `dist/standard/hypawave/` (a standard Agent Skill folder).
-- **Hermes** — `hermes skills tap add hypawave/skills` then install, or the maintainer publishes with `hermes skills publish dist/standard/hypawave --to github --repo hypawave/skills` (confirm exact flags with `hermes skills publish --help`).
+- **Cursor / Gemini / other agentskills.io tools** — point them at `dist/standard/hypawave/` (a standard Agent Skill folder).
+- **Codex** — agentskills.io skills live under `.agents/skills/`; this repo ships `.agents/skills/hypawave/`, so cloning it (or copying that folder into `~/.agents/skills/`) makes the skill available to Codex.
+- **Hermes** — `hermes skills tap add hypawave/skills` then install (Hermes scans the repo-root `skills/` directory, which this repo provides at `skills/hypawave/`).
 - **ClawHub** — `clawhub skill publish dist/clawhub/hypawave`.
 
 ## Two variants (verified)
@@ -44,6 +45,8 @@ build.mjs · package.json (dep-free) · LICENSE (MIT-0) · README.md · SECURITY
 .claude-plugin/marketplace.json   ← Claude marketplace (source: ./dist/claude)
 .github/workflows/validate.yml    ← CI: build + skills-ref validate + signer self-test
 dist/                 ← generated bundles (do not edit by hand)
+skills/hypawave/      ← generated: repo-root path Hermes taps scan
+.agents/skills/hypawave/  ← generated: repo-root path Codex scans
 ```
 
 Body + `scripts/` are copied verbatim into every bundle — they can't drift. Only the frontmatter + packaging differ. Edit `core/`, then rebuild.
