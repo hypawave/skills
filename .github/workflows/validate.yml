@@ -12,11 +12,13 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
-      # Regenerate bundles from source and fail if anything is out of sync.
+      # Regenerate all bundles from source and fail if anything is out of sync.
       - run: node build.mjs
-      - run: git diff --exit-code dist || (echo "dist/ is stale — run 'node build.mjs' and commit" && exit 1)
-      # agentskills.io spec validation (standard + the Claude-packaged skill).
+      - run: git diff --exit-code dist skills .agents || (echo "generated output is stale — run 'node build.mjs' and commit" && exit 1)
+      # agentskills.io spec validation (standard, Claude-packaged, Hermes, Codex paths).
       - run: npx --yes skills-ref validate dist/standard/hypawave
       - run: npx --yes skills-ref validate dist/claude/skills/hypawave
+      - run: npx --yes skills-ref validate skills/hypawave
+      - run: npx --yes skills-ref validate .agents/skills/hypawave
       # Signing helper reproduces the published test vector.
       - run: node dist/standard/hypawave/scripts/sign_request.mjs --selftest
