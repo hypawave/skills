@@ -9,9 +9,14 @@
  *   variants/claude/     Claude plugin manifest (wraps the STANDARD skill)
  *        ↓ build
  *   dist/
- *     standard/hypawave/        ← agentskills.io: Claude, Cursor, Codex, Hermes, Gemini, … (one file, ~40 tools)
+ *     standard/hypawave/        ← agentskills.io: Cursor, Gemini, … (one file, ~40 tools)
  *     claude/                   ← Claude plugin packaging of the standard skill (for marketplace distribution)
  *     clawhub/hypawave/         ← ClawHub's own dialect (metadata.openclaw; no `license` field)
+ *   skills/hypawave/            ← repo-root path Hermes taps scan (`hermes skills tap add hypawave/skills`)
+ *   .agents/skills/hypawave/    ← repo-root path Codex scans (`.agents/skills`); also the cross-tool convention
+ *
+ * The two repo-root paths are the SAME standard agentskills.io skill as
+ * dist/standard, placed where Hermes and Codex look when they clone/tap the repo.
  *
  * Only two SKILL.md frontmatter variants exist (standard + clawhub); Claude is a
  * packaging of the standard one, not a third file. Body + scripts are copied
@@ -63,7 +68,10 @@ function readExtra(variant) {
 }
 const copyLicense = (dir) => fs.copyFileSync(path.join(root, "LICENSE"), path.join(dir, "LICENSE"));
 
-fs.rmSync(distDir, { recursive: true, force: true });
+// Generated output dirs — cleaned on every build so they can't go stale.
+const hermesDir = path.join(root, "skills");
+const codexDir = path.join(root, ".agents");
+for (const d of [distDir, hermesDir, codexDir]) fs.rmSync(d, { recursive: true, force: true });
 
 // 2. Standard (agentskills.io) — the universal bundle. Skill dir name == `name`.
 {
@@ -90,5 +98,19 @@ fs.rmSync(distDir, { recursive: true, force: true });
   copyLicense(path.join(base, name));
 }
 
-console.log("Built bundles → dist/{standard,claude,clawhub}");
+// 5. Hermes tap path — repo-root skills/<name>/ (the standard skill, where Hermes scans).
+{
+  const dir = path.join(hermesDir, name);
+  emitSkill(standardFront, dir);
+  copyLicense(dir);
+}
+
+// 6. Codex path — repo-root .agents/skills/<name>/ (the standard skill, where Codex scans).
+{
+  const dir = path.join(codexDir, "skills", name);
+  emitSkill(standardFront, dir);
+  copyLicense(dir);
+}
+
+console.log("Built bundles → dist/{standard,claude,clawhub}, skills/, .agents/skills/");
 console.log(`  shared body: ${body.length} chars · name: ${name} (${name.length}/64) · description: ${description.length}/1024`);
