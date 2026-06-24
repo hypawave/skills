@@ -8,13 +8,21 @@ Non-custodial and dependency-free — see [SECURITY.md](SECURITY.md) for the tru
 
 ## Install (users)
 
+**One line, most agents** (Claude Code, Codex, Cursor, GitHub Copilot, Amp, and 70+ others — via Vercel's `skills` CLI):
+
+```
+npx skills add hypawave/skills
+```
+
+Per-platform alternatives:
+
 - **Claude Code** — add this repo as a plugin marketplace, then install:
   ```
   /plugin marketplace add hypawave/skills
   /plugin install hypawave@hypawave
   ```
-  Or use it standalone: copy `dist/standard/hypawave/` into `~/.claude/skills/`.
-- **Cursor / Gemini / other agentskills.io tools** — point them at `dist/standard/hypawave/` (a standard Agent Skill folder).
+  Or standalone: copy `dist/standard/hypawave/` into `~/.claude/skills/`.
+- **Cursor / Gemini / other agentskills.io tools** — `npx skills add hypawave/skills`, or point them at `dist/standard/hypawave/`.
 - **Codex** — agentskills.io skills live under `.agents/skills/`; this repo ships `.agents/skills/hypawave/`, so cloning it (or copying that folder into `~/.agents/skills/`) makes the skill available to Codex.
 - **Hermes** — `hermes skills tap add hypawave/skills` then install (Hermes scans the repo-root `skills/` directory, which this repo provides at `skills/hypawave/`).
 - **ClawHub** — `clawhub skill publish dist/clawhub/hypawave`.
