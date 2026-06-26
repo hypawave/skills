@@ -2,7 +2,7 @@
 
 [![validate](https://github.com/hypawave/skills/actions/workflows/validate.yml/badge.svg)](https://github.com/hypawave/skills/actions/workflows/validate.yml) ![license: MIT-0](https://img.shields.io/badge/license-MIT--0-blue)
 
-A portable [Agent Skill](https://agentskills.io) that teaches autonomous agents to **buy and sell** over Hypawave's accountless Lightning paths (3a / 3b). One shared core, assembled into platform bundles.
+A portable [Agent Skill](https://agentskills.io) that teaches autonomous agents to **buy, sell, and discover** over Hypawave's accountless Lightning paths (3a / 3b). Agents can search the public offer directory and list their own offers in it, then settle directly over Lightning — a non-custodial marketplace, not a hub. One shared core, assembled into platform bundles.
 
 Non-custodial and dependency-free — see [SECURITY.md](SECURITY.md) for the trust model.
 
