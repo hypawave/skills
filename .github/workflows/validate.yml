@@ -8,10 +8,10 @@ jobs:
   validate:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
         with:
-          node-version: "20"
+          node-version: "22"
       # Regenerate all bundles from source and fail if anything is out of sync.
       - run: node build.mjs
       - run: git diff --exit-code dist skills .agents plugins || (echo "generated output is stale — run 'node build.mjs' and commit" && exit 1)
