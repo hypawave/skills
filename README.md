@@ -23,7 +23,12 @@ Per-platform alternatives:
   ```
   Or standalone: copy `dist/standard/hypawave/` into `~/.claude/skills/`.
 - **Cursor / Gemini / other agentskills.io tools** — `npx skills add hypawave/skills`, or point them at `dist/standard/hypawave/`.
-- **Codex** — agentskills.io skills live under `.agents/skills/`; this repo ships `.agents/skills/hypawave/`, so cloning it (or copying that folder into `~/.agents/skills/`) makes the skill available to Codex.
+- **Codex (plugin)** — add this repo as a plugin marketplace, then install:
+  ```
+  codex plugin marketplace add hypawave/skills
+  ```
+  Enable **hypawave** from the Codex app's Plugins view (or in-session: `/plugin install hypawave@hypawave`). Manifest: `.agents/plugins/marketplace.json`; the plugin builds to `plugins/hypawave/`.
+- **Codex (bare skill)** — agentskills.io skills also live under `.agents/skills/`; this repo ships `.agents/skills/hypawave/`, so cloning it (or copying that folder into `~/.agents/skills/`) makes the skill available to Codex without the plugin.
 - **Hermes** — `hermes skills tap add hypawave/skills` then install (Hermes scans the repo-root `skills/` directory, which this repo provides at `skills/hypawave/`).
 - **ClawHub** — `clawhub skill publish dist/clawhub/hypawave`.
 
@@ -35,9 +40,10 @@ agentskills.io is the open standard (originally Anthropic's), and **Claude Code,
 |---|---|---|
 | `dist/standard/hypawave/` | agentskills.io standard | Claude Code (standalone), Cursor, Codex, Hermes Skills Hub, Gemini, Copilot, … |
 | `dist/claude/` | same standard skill, wrapped in a plugin | Claude marketplace **distribution** (`.claude-plugin/plugin.json` + `skills/hypawave/`) |
+| `plugins/hypawave/` | same standard skill, native Codex plugin | Codex marketplace **distribution** (`.codex-plugin/plugin.json` + `skills/hypawave/`) |
 | `dist/clawhub/hypawave/` | ClawHub dialect (`metadata.openclaw`, no `license` field) | ClawHub only |
 
-There are only **two SKILL.md frontmatters** (standard + clawhub). Claude is a *packaging* of the standard skill, not a third file.
+There are only **two SKILL.md frontmatters** (standard + clawhub). Claude and Codex are *packagings* of the standard skill, not extra frontmatter files.
 
 ## Layout
 
@@ -49,12 +55,16 @@ variants/
   standard/frontmatter.yml   ← agentskills.io extras: license, compatibility, metadata
   clawhub/frontmatter.yml    ← ClawHub extras: version, metadata.openclaw
   claude/plugin.json          ← Claude plugin manifest (wraps the standard skill)
+  codex/plugin.json           ← Codex plugin manifest (skills: ./skills/)
+  codex/marketplace.json      ← Codex marketplace entry (source, policy, category)
 build.mjs · package.json (dep-free) · LICENSE (MIT-0) · README.md · SECURITY.md · CHANGELOG.md
 .claude-plugin/marketplace.json   ← Claude marketplace (source: ./dist/claude)
 .github/workflows/validate.yml    ← CI: build + skills-ref validate + signer self-test
 dist/                 ← generated bundles (do not edit by hand)
 skills/hypawave/      ← generated: repo-root path Hermes taps scan
-.agents/skills/hypawave/  ← generated: repo-root path Codex scans
+.agents/skills/hypawave/  ← generated: repo-root path Codex scans (bare skill)
+plugins/hypawave/     ← generated: native Codex plugin (.codex-plugin/plugin.json + skills/)
+.agents/plugins/marketplace.json  ← generated: Codex marketplace (source: ./plugins/hypawave)
 ```
 
 Body + `scripts/` are copied verbatim into every bundle — they can't drift. Only the frontmatter + packaging differ. Edit `core/`, then rebuild.
@@ -62,7 +72,7 @@ Body + `scripts/` are copied verbatim into every bundle — they can't drift. On
 ## Build
 
 ```bash
-node build.mjs        # → dist/{standard,claude,clawhub}
+node build.mjs        # → dist/{standard,claude,clawhub}, skills/, .agents/{skills,plugins}, plugins/
 ```
 
 `build.mjs` fails fast if `name`/`description` violate the agentskills.io constraints, and names every skill directory `hypawave` (the spec requires the directory name to equal `name`).
@@ -71,6 +81,7 @@ node build.mjs        # → dist/{standard,claude,clawhub}
 
 - **agentskills.io ecosystem** (Cursor, Codex, Hermes Skills Hub, Gemini, …) — publish `dist/standard/hypawave/`. Validate first: `npx skills-ref validate dist/standard/hypawave` (passes).
 - **Claude** — `dist/standard/hypawave/SKILL.md` works standalone in `~/.claude/skills/` (also `skills-ref`-valid). For marketplace distribution, the repo-root `.claude-plugin/marketplace.json` already lists the plugin (`source: ./dist/claude`), so users run `/plugin marketplace add hypawave/skills`. For the public catalog, submit to `anthropics/claude-plugins-community` (the review runs `claude plugin validate` + safety screening).
+- **Codex (plugin)** — the repo-root `.agents/plugins/marketplace.json` lists the native plugin (`source: ./plugins/hypawave`), so users run `codex plugin marketplace add hypawave/skills` and install from the Codex Plugins view. Validate the bundled skill first: `npx skills-ref validate plugins/hypawave/skills/hypawave` (passes). (The bare skill also ships under `.agents/skills/`, covered by the agentskills.io line above.)
 - **ClawHub** — `clawhub skill publish dist/clawhub/hypawave`. **Do not** validate this bundle with `skills-ref` — ClawHub is a separate format (top-level `version`, `metadata.openclaw`) that the agentskills.io validator intentionally rejects; ClawHub validates it at publish time.
 
 ## Verification status
