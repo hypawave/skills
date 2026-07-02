@@ -14,11 +14,14 @@ jobs:
           node-version: "20"
       # Regenerate all bundles from source and fail if anything is out of sync.
       - run: node build.mjs
-      - run: git diff --exit-code dist skills .agents || (echo "generated output is stale — run 'node build.mjs' and commit" && exit 1)
+      - run: git diff --exit-code dist skills .agents plugins || (echo "generated output is stale — run 'node build.mjs' and commit" && exit 1)
       # agentskills.io spec validation (standard, Claude-packaged, Hermes, Codex paths).
       - run: npx --yes skills-ref validate dist/standard/hypawave
       - run: npx --yes skills-ref validate dist/claude/skills/hypawave
       - run: npx --yes skills-ref validate skills/hypawave
       - run: npx --yes skills-ref validate .agents/skills/hypawave
+      - run: npx --yes skills-ref validate plugins/hypawave/skills/hypawave
+      # Codex plugin manifests parse and carry required fields.
+      - run: node -e "const fs=require('fs');const p=JSON.parse(fs.readFileSync('plugins/hypawave/.codex-plugin/plugin.json'));if(!p.name||!p.version||!p.description||!p.skills)throw new Error('plugin.json missing required field');const m=JSON.parse(fs.readFileSync('.agents/plugins/marketplace.json'));const e=m.plugins&&m.plugins[0];if(!m.name||!e||!e.name||!e.source||!e.policy||!e.category)throw new Error('marketplace.json missing required field');console.log('Codex manifests OK')"
       # Signing helper reproduces the published test vector.
       - run: node dist/standard/hypawave/scripts/sign_request.mjs --selftest
