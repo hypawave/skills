@@ -1,0 +1,12 @@
+{
+  "name": "hypawave",
+  "interface": { "displayName": "Hypawave" },
+  "plugins": [
+    {
+      "name": "hypawave",
+      "source": { "source": "local", "path": "./plugins/hypawave" },
+      "policy": { "installation": "AVAILABLE", "authentication": "ON_INSTALL" },
+      "category": "Finance"
+    }
+  ]
+}
