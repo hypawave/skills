@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.3.0
+
+Codex plugin support + seller key onboarding.
+
+- **Codex plugin**: native `.codex-plugin/plugin.json` + `.agents/plugins/marketplace.json` (built to `plugins/hypawave/`), installable via the Codex marketplace. Same shared skill as every other variant.
+- **`sign_request.mjs --gen`**: generate a fresh secp256k1 identity key to save as `$HYPAWAVE_PRIVKEY`.
+- SKILL.md: seller onboarding now documents generating the key (`--gen`), storing it as `HYPAWAVE_PRIVKEY`, and backing it up (your identity — controls your offers, separate from your payout wallet).
+- CI: validates the Codex plugin skill and manifests; staleness check now covers `plugins/`.
+
 ## 0.2.0
 
 Offer discovery / public marketplace.

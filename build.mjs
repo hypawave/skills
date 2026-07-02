@@ -14,6 +14,8 @@
  *     clawhub/hypawave/         ← ClawHub's own dialect (metadata.openclaw; no `license` field)
  *   skills/hypawave/            ← repo-root path Hermes taps scan (`hermes skills tap add hypawave/skills`)
  *   .agents/skills/hypawave/    ← repo-root path Codex scans (`.agents/skills`); also the cross-tool convention
+ *   plugins/hypawave/          ← native Codex plugin (.codex-plugin/plugin.json + skills/), installable via marketplace
+ *   .agents/plugins/marketplace.json ← Codex marketplace manifest pointing at plugins/hypawave
  *
  * The two repo-root paths are the SAME standard agentskills.io skill as
  * dist/standard, placed where Hermes and Codex look when they clone/tap the repo.
@@ -71,7 +73,8 @@ const copyLicense = (dir) => fs.copyFileSync(path.join(root, "LICENSE"), path.jo
 // Generated output dirs — cleaned on every build so they can't go stale.
 const hermesDir = path.join(root, "skills");
 const codexDir = path.join(root, ".agents");
-for (const d of [distDir, hermesDir, codexDir]) fs.rmSync(d, { recursive: true, force: true });
+const pluginsDir = path.join(root, "plugins");
+for (const d of [distDir, hermesDir, codexDir, pluginsDir]) fs.rmSync(d, { recursive: true, force: true });
 
 // 2. Standard (agentskills.io) — the universal bundle. Skill dir name == `name`.
 {
@@ -112,5 +115,22 @@ for (const d of [distDir, hermesDir, codexDir]) fs.rmSync(d, { recursive: true, 
   copyLicense(dir);
 }
 
-console.log("Built bundles → dist/{standard,claude,clawhub}, skills/, .agents/skills/");
+// 7. Codex native plugin — plugins/<name>/ with .codex-plugin/plugin.json + skills/<name>/ at plugin root,
+//    discovered via .agents/plugins/marketplace.json (source.path -> ./plugins/<name>, per the Codex plugin spec).
+{
+  const base = path.join(pluginsDir, name);
+  emitSkill(standardFront, path.join(base, "skills", name));
+  writeFile(
+    path.join(base, ".codex-plugin", "plugin.json"),
+    fs.readFileSync(path.join(variantsDir, "codex", "plugin.json"), "utf8")
+  );
+  copyLicense(base);
+  // Marketplace manifest lives under .agents/ (cleaned each build), so generate it here.
+  writeFile(
+    path.join(codexDir, "plugins", "marketplace.json"),
+    fs.readFileSync(path.join(variantsDir, "codex", "marketplace.json"), "utf8")
+  );
+}
+
+console.log("Built bundles → dist/{standard,claude,clawhub}, skills/, .agents/skills/, plugins/ (Codex) + .agents/plugins/marketplace.json");
 console.log(`  shared body: ${body.length} chars · name: ${name} (${name.length}/64) · description: ${description.length}/1024`);
