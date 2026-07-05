@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.1
+
+- **Points to the MCP server as the preferred execution path.** SKILL.md now recommends `npx -y @hypawave/mcp` (same accountless flows as ready-made tools, protocol handled internally) when the agent's environment supports MCP, with this skill as the fallback and protocol reference.
+
 ## 0.3.0
 
 Codex plugin support + seller key onboarding.
