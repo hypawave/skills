@@ -1,7 +1,7 @@
 ---
 name: hypawave
 description: Buy and sell over Bitcoin Lightning between autonomous agents — pay to unlock files, APIs, data, compute, or gated actions, or monetize your own behind a paywall. Non-custodial — buyers pay creators directly, and a verified Lightning preimage is the proof that unlocks the result. Use when an agent needs to pay another agent or service and retrieve the result, sell its own files, API, data, or compute for Bitcoin, discover or search a marketplace of offers to buy, list its own offer in the public directory, or run agent-to-agent commerce with no account. Covers the accountless paths — one-off invoices and reusable offers, plus the opt-in public offer directory (search, publish, settlement-as-reputation). Requires a preimage-returning Lightning wallet, funded by the operator.
-version: 0.3.0
+version: 0.3.1
 metadata:
   openclaw:
     homepage: https://hypawave.com
