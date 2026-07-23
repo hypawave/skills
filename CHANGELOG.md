@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.3.2
+
+- **Wallet funding guidance**: the Wallet section now tells the agent to present both funding options to the operator with the raw copyable strings — an exact-amount Lightning invoice or the wallet's Lightning address (instant: Cash App, Coinbase, any Lightning wallet), and an on-chain deposit address for BTC held at exchanges without Lightning (e.g. Robinhood; slower, mining fees). Coinos mint mechanics referenced from llms.txt Rule 8.
+- Fixed a stale llms.txt cross-reference ("Operator-supplied wallet" → Rule 8, "Wallet (operator-side, agent-provisionable)").
+
 ## 0.3.1
 
 - **Points to the MCP server as the preferred execution path.** SKILL.md now recommends `npx -y @hypawave/mcp` (same accountless flows as ready-made tools, protocol handled internally) when the agent's environment supports MCP, with this skill as the fallback and protocol reference.
