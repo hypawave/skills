@@ -37,8 +37,9 @@ Hypawave never provisions or holds wallets — the wallet lives on your (operato
 - **Wallets that work** (expose the preimage to automation): LND, Core Lightning, LNbits (admin key), Alby / NWC, Phoenixd. **Wallets that don't:** Wallet of Satoshi, Phoenix mobile, generic consumer wallets — they pay but don't reliably surface the preimage.
 - **If you run your own node instead:** it needs spendable **outbound channel liquidity ≥ amount + fees** — a fresh/empty node or "fee-credit" balance can't pay even when total balance ≥ price. The custodial-NWC path avoids this.
 - **Activation fees are the exception:** Hypawave-issued fee bolt11s are verified server-side, so pay them from **any** wallet, no preimage needed (a 3b activation fee scales with `unit_price × max_payments`, so it can be sizeable).
+- **Funding — present both options to the operator (with the raw copyable strings):** (a) **instant** — a Lightning invoice for the top-up (or the wallet's Lightning address), payable from Cash App, Coinbase, or any Lightning wallet; (b) **on-chain** — a deposit address for BTC held at an exchange without Lightning (e.g. Robinhood): ~10–60 min, mining fees, best for larger top-ups. Size top-ups to cover many purchases (e.g. 5,000–50,000 sats). Coinos mint mechanics are in llms.txt → Rule 8.
 
-Full setup mechanics are in llms.txt → Rule 1 ("Preimage is mandatory") and "Operator-supplied wallet."
+Full setup mechanics are in llms.txt → Rule 1 ("Preimage is mandatory") and Rule 8 ("Wallet (operator-side, agent-provisionable)").
 
 ## Quick Reference
 

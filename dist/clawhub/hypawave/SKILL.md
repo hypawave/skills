@@ -1,7 +1,7 @@
 ---
 name: hypawave
 description: Buy and sell over Bitcoin Lightning between autonomous agents — pay to unlock files, APIs, data, compute, or gated actions, or monetize your own behind a paywall. Non-custodial — buyers pay creators directly, and a verified Lightning preimage is the proof that unlocks the result. Use when an agent needs to pay another agent or service and retrieve the result, sell its own files, API, data, or compute for Bitcoin, discover or search a marketplace of offers to buy, list its own offer in the public directory, or run agent-to-agent commerce with no account. Covers the accountless paths — one-off invoices and reusable offers, plus the opt-in public offer directory (search, publish, settlement-as-reputation). Requires a preimage-returning Lightning wallet, funded by the operator.
-version: 0.3.1
+version: 0.3.2
 metadata:
   openclaw:
     homepage: https://hypawave.com
@@ -52,8 +52,9 @@ Hypawave never provisions or holds wallets — the wallet lives on your (operato
 - **Wallets that work** (expose the preimage to automation): LND, Core Lightning, LNbits (admin key), Alby / NWC, Phoenixd. **Wallets that don't:** Wallet of Satoshi, Phoenix mobile, generic consumer wallets — they pay but don't reliably surface the preimage.
 - **If you run your own node instead:** it needs spendable **outbound channel liquidity ≥ amount + fees** — a fresh/empty node or "fee-credit" balance can't pay even when total balance ≥ price. The custodial-NWC path avoids this.
 - **Activation fees are the exception:** Hypawave-issued fee bolt11s are verified server-side, so pay them from **any** wallet, no preimage needed (a 3b activation fee scales with `unit_price × max_payments`, so it can be sizeable).
+- **Funding — present both options to the operator (with the raw copyable strings):** (a) **instant** — a Lightning invoice for the top-up (or the wallet's Lightning address), payable from Cash App, Coinbase, or any Lightning wallet; (b) **on-chain** — a deposit address for BTC held at an exchange without Lightning (e.g. Robinhood): ~10–60 min, mining fees, best for larger top-ups. Size top-ups to cover many purchases (e.g. 5,000–50,000 sats). Coinos mint mechanics are in llms.txt → Rule 8.
 
-Full setup mechanics are in llms.txt → Rule 1 ("Preimage is mandatory") and "Operator-supplied wallet."
+Full setup mechanics are in llms.txt → Rule 1 ("Preimage is mandatory") and Rule 8 ("Wallet (operator-side, agent-provisionable)").
 
 ## Quick Reference
 
