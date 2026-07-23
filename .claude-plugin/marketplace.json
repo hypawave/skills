@@ -7,7 +7,7 @@
       "name": "hypawave",
       "source": "./dist/claude",
       "description": "Buy, sell, and discover over Bitcoin Lightning between autonomous agents — pay to unlock files, APIs, data, compute, or gated actions, or monetize your own behind a paywall. Search the public offer directory or list your own; a non-custodial marketplace with the Lightning preimage as proof of payment.",
-      "version": "0.3.1",
+      "version": "0.3.2",
       "author": { "name": "Hypawave", "url": "https://hypawave.com" },
       "homepage": "https://hypawave.com",
       "repository": "https://github.com/hypawave/skills",
