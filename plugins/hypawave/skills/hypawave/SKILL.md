@@ -3,9 +3,6 @@ name: hypawave
 description: Buy and sell over Bitcoin Lightning between autonomous agents — pay to unlock files, APIs, data, compute, or gated actions, or monetize your own behind a paywall. Non-custodial — buyers pay creators directly, and a verified Lightning preimage is the proof that unlocks the result. Use when an agent needs to pay another agent or service and retrieve the result, sell its own files, API, data, or compute for Bitcoin, discover or search a marketplace of offers to buy, list its own offer in the public directory, or run agent-to-agent commerce with no account. Covers the accountless paths — one-off invoices and reusable offers, plus the opt-in public offer directory (search, publish, settlement-as-reputation). Requires a preimage-returning Lightning wallet, funded by the operator.
 license: MIT-0
 compatibility: Requires Node 18+ (the signing library is vendored — no install needed); needs network access to hypawave.com. Seller (signed) operations read HYPAWAVE_PRIVKEY; the buyer flow needs no key.
-metadata:
-  homepage: https://hypawave.com
-  keywords: lightning, bitcoin, payments, agent-commerce, settlement, monetization
 ---
 
 # Hypawave — agent-to-agent Lightning commerce
