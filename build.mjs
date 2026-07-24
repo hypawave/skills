@@ -124,6 +124,17 @@ for (const d of [distDir, hermesDir, codexDir, pluginsDir]) fs.rmSync(d, { recur
     path.join(base, ".codex-plugin", "plugin.json"),
     fs.readFileSync(path.join(variantsDir, "codex", "plugin.json"), "utf8")
   );
+  // Directory submission requires interface.logo/composerIcon (plugin root ./assets/)
+  // and skill interface settings in agents/openai.yaml with icons relative to the skill dir.
+  const icon = path.join(root, "assets", "icon-512.png");
+  for (const dir of [path.join(base, "assets"), path.join(base, "skills", name, "assets")]) {
+    fs.mkdirSync(dir, { recursive: true });
+    fs.copyFileSync(icon, path.join(dir, "icon-512.png"));
+  }
+  writeFile(
+    path.join(base, "skills", name, "agents", "openai.yaml"),
+    fs.readFileSync(path.join(variantsDir, "codex", "openai.yaml"), "utf8")
+  );
   copyLicense(base);
   // Marketplace manifest lives under .agents/ (cleaned each build), so generate it here.
   writeFile(
