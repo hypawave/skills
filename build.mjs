@@ -57,6 +57,9 @@ if (description.includes(": ") || description.includes(" #"))
 const sharedHead = `name: ${name}\ndescription: ${description}`;
 const standardFront = sharedHead + readExtra("standard");
 const clawhubFront = sharedHead + readExtra("clawhub");
+// Codex directory submission rejects `metadata` in SKILL.md (interface settings
+// belong in agents/openai.yaml; homepage/keywords live in plugin.json).
+const codexFront = sharedHead + readExtra("codex");
 
 const writeFile = (p, c) => (fs.mkdirSync(path.dirname(p), { recursive: true }), fs.writeFileSync(p, c));
 const emitSkill = (frontmatter, skillDir) => {
@@ -119,7 +122,7 @@ for (const d of [distDir, hermesDir, codexDir, pluginsDir]) fs.rmSync(d, { recur
 //    discovered via .agents/plugins/marketplace.json (source.path -> ./plugins/<name>, per the Codex plugin spec).
 {
   const base = path.join(pluginsDir, name);
-  emitSkill(standardFront, path.join(base, "skills", name));
+  emitSkill(codexFront, path.join(base, "skills", name));
   writeFile(
     path.join(base, ".codex-plugin", "plugin.json"),
     fs.readFileSync(path.join(variantsDir, "codex", "plugin.json"), "utf8")
