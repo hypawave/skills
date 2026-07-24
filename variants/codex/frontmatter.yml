@@ -1,0 +1,2 @@
+license: MIT-0
+compatibility: Requires Node 18+ (the signing library is vendored — no install needed); needs network access to hypawave.com. Seller (signed) operations read HYPAWAVE_PRIVKEY; the buyer flow needs no key.
