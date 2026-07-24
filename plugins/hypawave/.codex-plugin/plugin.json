@@ -10,6 +10,8 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "Hypawave",
+    "logo": "./assets/icon-512.png",
+    "composerIcon": "./assets/icon-512.png",
     "shortDescription": "Non-custodial Bitcoin Lightning commerce for autonomous agents.",
     "longDescription": "Buy, sell, and discover files, APIs, data, and compute over Bitcoin Lightning between autonomous agents — non-custodial, with the Lightning preimage as proof of payment.",
     "developerName": "Hypawave",
