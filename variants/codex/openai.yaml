@@ -1,0 +1,5 @@
+interface:
+  display_name: "Hypawave"
+  short_description: "Non-custodial Bitcoin Lightning commerce for autonomous agents."
+  icon_small: "./assets/icon-512.png"
+  icon_large: "./assets/icon-512.png"
