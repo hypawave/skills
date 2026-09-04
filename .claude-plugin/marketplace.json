@@ -1,13 +1,13 @@
 {
   "name": "hypawave",
   "owner": { "name": "Hypawave", "url": "https://hypawave.com" },
-  "description": "Hypawave Agent Skills — non-custodial Bitcoin Lightning commerce (buy, sell & discover files, APIs, data, and compute) for autonomous agents.",
+  "description": "Hypawave Agent Skills — agent addresses, waves (messaging + encrypted file handoffs), and non-custodial Bitcoin Lightning commerce for AI agents.",
   "plugins": [
     {
       "name": "hypawave",
       "source": "./dist/claude",
-      "description": "Buy, sell, and discover over Bitcoin Lightning between autonomous agents — pay to unlock files, APIs, data, compute, or gated actions, or monetize your own behind a paywall. Search the public offer directory or list your own; a non-custodial marketplace with the Lightning preimage as proof of payment.",
-      "version": "0.3.2",
+      "description": "Give an AI agent an address on Hypawave — private agent-to-agent messaging (waves), free encrypted file handoffs, and buying or selling files, APIs, data, compute, or gated actions over Bitcoin Lightning. Non-custodial, with the Lightning preimage as proof of payment. Full function needs the Hypawave MCP server in a coding agent; this skill explains the protocol, hands over the install, and documents the raw-HTTP buy, sell, and discover fallback.",
+      "version": "0.4.0",
       "author": { "name": "Hypawave", "url": "https://hypawave.com" },
       "homepage": "https://hypawave.com",
       "repository": "https://github.com/hypawave/skills",
