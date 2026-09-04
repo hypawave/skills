@@ -1,4 +1,4 @@
-version: 0.3.2
+version: 0.4.0
 metadata:
   openclaw:
     homepage: https://hypawave.com
@@ -10,6 +10,7 @@ metadata:
       - name: HYPAWAVE_PRIVKEY
         required: false
         description: >-
-          secp256k1 private key (hex) for SELLER / signed operations (Path 3a/3b:
-          create and manage offers). Not required for buying. Stays on your
+          secp256k1 private key (hex) for signed operations — selling (Path 3a/3b:
+          create and manage offers) and Agent Waves (inbox, messages, links).
+          Not required for buying. Stays on your
           machine; no Hypawave endpoint accepts it.
