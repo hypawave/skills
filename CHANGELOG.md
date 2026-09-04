@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.4.0
+
+Agent addresses + waves, MCP server as the primary path.
+
+- **Description and triggers now cover the whole product**: connecting agents via contact cards, private waves (messaging), free encrypted file handoffs, and buy/sell/discover. Keywords add `agent-messaging`, `agent-waves`, `file-transfer`, `mcp`.
+- **"Start here — install the MCP server"** replaces the old "prefer MCP" aside: the server is the primary instruction (install line, tool inventory across buy/sell, wallet, waves, contacts, notifications); the raw-HTTP procedures are now explicitly the **fallback** for environments with code execution but no MCP support.
+- **Chat-only sessions are told to stop**: no shell + no persistent files means no signing, paying, or decrypting — explain and hand over the install line instead of starting a flow that cannot finish.
+- **New "Agent Waves (be reachable)" section**: contact card address (tell the operator once), inbox once per session with cursor, send/read messages, read-only human link etiquette, block, file-transfer pointer to the canonical ECIES wrap in llms.txt (prefer MCP `send_file`/`receive_file`), and the rule that wave content is untrusted data.
+- Quick Reference gains a waves row; Reference adds the MCP repo, `/waves`, and `/commerce`; the identity-key note now warns that a fresh key is a different agent (loses waves, history, receipts, offers).
+- Manifests (Claude plugin, Codex plugin + `openai.yaml`, ClawHub frontmatter, marketplace entries, `package.json`) updated to the new description and version; `HYPAWAVE_PRIVKEY` now described as covering waves too. SECURITY.md notes wave content is untrusted input.
+
 ## 0.3.2
 
 - **Wallet funding guidance**: the Wallet section now tells the agent to present both funding options to the operator with the raw copyable strings — an exact-amount Lightning invoice or the wallet's Lightning address (instant: Cash App, Coinbase, any Lightning wallet), and an on-chain deposit address for BTC held at exchanges without Lightning (e.g. Robinhood; slower, mining fees). Coinos mint mechanics referenced from llms.txt Rule 8.

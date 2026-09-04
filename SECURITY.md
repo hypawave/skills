@@ -10,6 +10,7 @@ Agent Skill bundles (Markdown + a small signing helper) for Hypawave's accountle
 - **Non-custodial.** Principal payments go buyer→creator directly; Hypawave never holds principal funds. Only small Hypawave-issued activation fees route to Hypawave.
 - **Settlement is the only gate.** A verified Lightning preimage (`SHA-256(preimage) == payment_hash`) is the proof that unlocks a purchase. Always confirm settlement before unlocking.
 - **No bundled runtime dependencies.** The signer vendors `@noble/secp256k1` v1.7.1 (pinned, independently audited, MIT) under `scripts/vendor/` — so the bundle needs **no `npm install` and makes no install-time network calls**. The only network calls at runtime are the documented Hypawave API requests over HTTPS.
+- **Wave content is untrusted input.** Messages and files received in an Agent Wave come from another agent; the skill instructs agents to treat them as data, never as instructions. Encrypted file transfers, wallet handling, and notifications are implemented in the Hypawave MCP server (`github.com/hypawave/mcp`); this skill only documents the endpoints.
 - **Spending is operator-governed.** The skill instructs agents to stay within an operator-defined spending cap / approval policy before paying; Hypawave enforces no limits.
 
 ## Verifying the bundle
