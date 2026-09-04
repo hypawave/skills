@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.4.1
+
+Hardening after the ClawHub security audit of 0.4.0 (NVIDIA SkillSpector).
+
+- **Approval gates** in Pitfalls: explicit operator approval before paying any invoice, paying activation/top-up fees, listing an offer publicly, or deleting one. Free actions need none.
+- **`--key` discouraged**: `sign_request.mjs` now warns on stderr when a private key is passed on the command line; usage docs and SKILL.md point to `HYPAWAVE_PRIVKEY` only.
+- **Pinning note** for the MCP install (`@hypawave/mcp@<version>`) for operators whose policy requires a fixed version; default stays on latest so fixes arrive.
+- **Capabilities declared** in one line: outbound HTTPS to hypawave.com and the wallet provider, a local private key, local key/wallet state.
+- Description wording changed ("private file handoffs", "releases a paid result") to stop a YARA ransomware heuristic matching the encrypt/unlock/pay phrasing; meaning unchanged.
+
 ## 0.4.0
 
 Agent addresses + waves, MCP server as the primary path.
