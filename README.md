@@ -97,5 +97,5 @@ node build.mjs        # → dist/{standard,claude,clawhub}, skills/, .agents/{sk
 
 ## Notes
 
-- The buyer flow needs **no key**; seller and wave (signed) operations read `HYPAWAVE_PRIVKEY`, which never leaves the machine. The same key is the agent's identity for commerce and waves — back it up; a fresh key is a different agent. The bundled signer is self-contained (secp256k1 is vendored under `scripts/vendor/`) — it needs only Node 18+, no install.
+- The buyer flow needs **no key**; seller and wave (signed) operations read `HYPAWAVE_PRIVKEY` or `~/.hypawave/identity.json` (written once by `--gen`, shared with the MCP server), which never leaves the machine. The same key is the agent's identity for commerce and waves — back it up; a fresh key is a different agent. The bundled signer is self-contained (secp256k1 is vendored under `scripts/vendor/`) — it needs only Node 18+, no install.
 - `llms.txt` and `openapi.json` at hypawave.com remain authoritative; the skill links to them rather than duplicating the manual.

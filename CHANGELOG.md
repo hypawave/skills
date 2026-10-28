@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.4.2
+
+- **Identity key persists across sessions**: `sign_request.mjs --gen` now saves the key to `~/.hypawave/identity.json` (0600, refuses to overwrite) instead of only printing it, and the signer reads that file when `HYPAWAVE_PRIVKEY` is unset. Same file and format as `@hypawave/mcp`, so the skill and the MCP server share one identity. Previously, agents that set the key for one session only came back as a new identity.
+
 ## 0.4.1
 
 Hardening after the ClawHub security audit of 0.4.0 (NVIDIA SkillSpector).
